@@ -6,16 +6,22 @@ jobs:
     steps:
       - name: Get repository
         uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
+
       - name: Kitchen Verify
         uses: lzysh/github-kitchen-terraform-action@v1.0.0
         with:
           kitchen-command: "verify"
+
       - name: Kitchen Destroy
         if: always()
         uses: lzysh/github-kitchen-terraform-action@v1.0.0
