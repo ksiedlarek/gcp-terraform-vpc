@@ -1,24 +1,35 @@
 ---
+# driver that will be used to create platform instances
+# in this case: "bridge between Test Kitchen and Terraform": https://www.rubydoc.info/github/newcontext-oss/kitchen-terraform/Kitchen/Driver/Terraform
+# responsible for terraform init
 driver:
   name: terraform
   root_module_directory: test/fixtures/vpc_tf
 
+# responsible for terraform plan/apply/destroy
+# https://www.rubydoc.info/github/newcontext-oss/kitchen-terraform/Kitchen/Provisioner/Terraform
 provisioner:
   name: terraform
 
+# used for running tests (kitchen verify)
+# https://www.rubydoc.info/github/newcontext-oss/kitchen-terraform/Kitchen/Verifier/Terraform
 verifier:
   name: terraform
-  color: true
+  color: true # coloured output
   systems:
+  # https://github.com/inspec/inspec-gcp
     - name: inspec-gcp
       backend: gcp
+      # controls are defined in test/integration/default/controls - default subfolder matches name under suites section
       controls:
+        # name of the control is defined in the .rb file, the .rb file can be named however you want
         - existance_check
 
-
+# attributes that are common to the collection of test suites
+# we are running these tests on our local system
 platforms:
-  #- name: terraform
   - name: local
 
+# Collection of test suites; matches name specified in inspec.yml
 suites:
   - name: default

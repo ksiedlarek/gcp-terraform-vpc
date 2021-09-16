@@ -5,6 +5,7 @@ depends:
   - name: inspec-gcp
     git: https://github.com/inspec/inspec-gcp.git
     tag: v1.8.0
+# attribute values can be provided in separate files
 attributes:
   - name: project_id
     required: true
