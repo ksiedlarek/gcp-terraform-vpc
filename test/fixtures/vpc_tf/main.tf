@@ -1,3 +1,8 @@
+provider "google" {
+  project     = var.project_id
+  region      = var.region
+}
+
 module "vpc_test" {
   source = "../../.."
   project_id = "dataflow-poc-317213"
