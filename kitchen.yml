@@ -1,0 +1,24 @@
+---
+driver:
+  name: terraform
+  root_module_directory: test/fixtures/vpc_tf
+
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+  color: true
+  systems:
+    - name: inspec-gcp
+      backend: gcp
+      controls:
+        - existance_check
+
+
+platforms:
+  #- name: terraform
+  - name: local
+
+suites:
+  - name: default

@@ -1,0 +1,16 @@
+---
+name: default
+title: inspec profile
+depends:
+  - name: inspec-gcp
+    git: https://github.com/inspec/inspec-gcp.git
+    tag: v1.8.0
+attributes:
+  - name: project_id
+    required: true
+    type: string
+    value: "dataflow-poc-317213"
+  - name: network_name
+    required: true
+    type: string
+    value: "my-test-vpc"
