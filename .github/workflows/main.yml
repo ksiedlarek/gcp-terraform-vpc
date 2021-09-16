@@ -20,9 +20,14 @@ jobs:
         run: sudo gem install bundler
       - name: Install kitchen
         run: bundle install
+      - name: Run converge
+        run: bundle exec kitchen converge
       - name: Run verify
-        run: bundle exec kitchen verify \
-             cat .kitchen/logs/default-local.log
+        run: bundle exec kitchen verify
+
+      - name: Logs
+        run: cat .kitchen/logs/default-local.log
+        if: always()
 
       - name: Run destroy
         run: bundle exec kitchen destroy
