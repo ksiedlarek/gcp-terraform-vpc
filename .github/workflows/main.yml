@@ -4,6 +4,8 @@ jobs:
   Run-Kitchen:
     runs-on: ubuntu-latest
     steps:
+      - name: Get repository
+        uses: actions/checkout@v2
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
